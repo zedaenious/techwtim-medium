@@ -1,14 +1,5 @@
-from cryptography.fernet import Fernet
-
-master_pwd = input('What is the master password? ')
-
-def write_key():
-  key = Fernet.generate_key()
-  #wb = write bits mode
-  with open('key.key', 'wb') as key_file:
-    key_file.write(key)
-
-def add():
+########METHODS######################################################
+def add(): 
   name = input('Username: ')
   pwd = input('Password: ')
 
@@ -20,12 +11,14 @@ def view():
   # r = read mode
   with open('pw.txt', 'r') as f:
     for line in f.readlines():
-      data = line.rstrip()
+      data = line.rstrip() #rstrip rmvs carriage return "\n" from string
       name, pwd = data.split(" | ")
       print('Username:', name, '\nPassword:', pwd + '\n')
 
+########START PROGRAM################################################
+print('Welcome to the lamest password manager application ever!')
+
 while True:
-  write_key()
   action = input('Would you like to (add) a new password, (view) existing passwords, or (quit) the program? ').lower()
 
   if action == 'quit':
@@ -35,7 +28,10 @@ while True:
     add()
     continue
   elif action == 'view':
-    view()
+    try:
+      view()
+    except:
+      print('Apologies, that file is not currently available. Please try again.')
     continue
   else:
     print('invalid choice')
