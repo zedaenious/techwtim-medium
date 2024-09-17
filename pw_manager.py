@@ -1,4 +1,12 @@
-# master_pwd = input('What is the master password? ')
+from cryptography.fernet import Fernet
+
+master_pwd = input('What is the master password? ')
+
+def write_key():
+  key = Fernet.generate_key()
+  #wb = write bits mode
+  with open('key.key', 'wb') as key_file:
+    key_file.write(key)
 
 def add():
   name = input('Username: ')
@@ -17,6 +25,7 @@ def view():
       print('Username:', name, '\nPassword:', pwd + '\n')
 
 while True:
+  write_key()
   action = input('Would you like to (add) a new password, (view) existing passwords, or (quit) the program? ').lower()
 
   if action == 'quit':
