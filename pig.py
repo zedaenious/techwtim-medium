@@ -2,6 +2,7 @@ import random
 
 max_score = 50
 
+#####METHODS####################################
 def roll():
   min_val = 1
   max_val = 6
@@ -9,35 +10,44 @@ def roll():
   
   return roll
 
+######GAME INITIALIZATION########################
 while True:
-  players = input("Enter the number of players (2-4): ")
-  if players.isdigit(): #gasp! errror handling
-    players = int(players)
-    if 2 <= players <= 4:
+  players_count = input("Enter the number of players (2-4): ")
+  if players_count.isdigit():
+    players_count = int(players_count)
+    if 2 <= players_count <= 4:
       break
     else:
       print("Selection must be betweeen 2 and 4 players. Please make a valid choice.")
   else:
     print()
 
-player_scores = [0 for p in range(players)]
-
-print(player_scores)
+# initialize players count list w/ 0 value for each player created
+player_scores = [0 for p in range(players_count)]
 
 while max(player_scores) < max_score:
-  current_score = 0
-  should_roll = input("Would you like to roll (y)?: ").lower()
-  
-  if should_roll != "y":
-    break
+  # START TURN
+  for player_i in range(players_count):
+    print("\nPlayer", player_i + 1, "turn has just started!\n")
+    current_score = 0
+    
+    while True:
+      should_roll = input("Would you like to roll (y)?: ").lower()    
+      if should_roll != "y":
+        break
 
-  value = roll()
+      value = roll()
 
-  if value == 1:
-    print("You rolled a 1, now your turn is done!!")
-    break
-  else:
-    current_score += value
-    print("You rolled a:", value)
-  
-  print("Your wcore is:", current_score)
+      if value == 1:
+        print("You rolled a 1, now your turn is done!!")
+        current_score = 0
+        break
+      else:
+        current_score += value
+        print("You rolled a:", value)
+      
+      print("Your wcore is:", current_score)
+
+    player_scores[player_i] += current_score
+    print("Your total score is:", player_scores[player_i])
+#end max_score while loop check
