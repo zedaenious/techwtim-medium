@@ -10,6 +10,11 @@ def roll():
   
   return roll
 
+def show_leaderboard():
+  print("#######LEADERBOARD#######")
+  for player_i in range(players_count):
+    print("Player", player_i + 1, ":", player_scores[player_i])
+  #end leaderboard
 ######GAME INITIALIZATION########################
 while True:
   players_count = input("Enter the number of players (2-4): ")
@@ -24,12 +29,13 @@ while True:
 
 # initialize players count list w/ 0 value for each player created
 player_scores = [0 for p in range(players_count)]
+show_leaderboard()
 
 while max(player_scores) < max_score:
   # START TURN
   for player_i in range(players_count):
     print("\nPlayer", player_i + 1, "turn has just started!")
-    print("Your total score is;", player_scores[player_i], "\n")
+    print("Your total score is:", player_scores[player_i], "\n")
     current_score = 0
     
     while True:
@@ -50,8 +56,9 @@ while max(player_scores) < max_score:
       print("Your wcore is:", current_score)
 
     player_scores[player_i] += current_score
-    print("Your total score is:", player_scores[player_i])
-  print('Player number', player_i, "turn is now over. ")
+    print("Your total score is:", player_scores[player_i], "\n\n")
+    show_leaderboard()
+  print('Player number', player_i + 1, "turn is now over.\n\n")
 #end max_score while loop check
 
 #winning conditions & program end
