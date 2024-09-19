@@ -28,7 +28,8 @@ player_scores = [0 for p in range(players_count)]
 while max(player_scores) < max_score:
   # START TURN
   for player_i in range(players_count):
-    print("\nPlayer", player_i + 1, "turn has just started!\n")
+    print("\nPlayer", player_i + 1, "turn has just started!")
+    print("Your total score is;", player_scores[player_i], "\n")
     current_score = 0
     
     while True:
@@ -50,4 +51,10 @@ while max(player_scores) < max_score:
 
     player_scores[player_i] += current_score
     print("Your total score is:", player_scores[player_i])
+  print('Player number', player_i, "turn is now over. ")
 #end max_score while loop check
+
+#winning conditions & program end
+max_score = max(player_scores)
+winning_idx = player_scores.index(max_score)
+print('Player', winning_idx + 1, "is the winner with a score of:", max_score)
